@@ -6,11 +6,15 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProdutoService } from '../services/produto.service';
+import { ListComponent } from './list/list.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 
 
 @NgModule({
-  declarations: [CreateComponent],
+  declarations: [CreateComponent, ListComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -18,6 +22,9 @@ import { ProdutoService } from '../services/produto.service';
     MatFormFieldModule,
     MatInputModule,
     MatCardModule,
+    MatTableModule,
+    MatIconModule,
+    MatButtonModule,
   ],
   exports: [CreateComponent],
   providers: [ProdutoService]

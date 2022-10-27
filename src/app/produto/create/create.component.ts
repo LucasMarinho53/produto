@@ -26,9 +26,6 @@ export class CreateComponent implements OnInit {
 
   cadastrar() {
     const produto = this.produtoForm.getRawValue() as ProdutoModel;
-
-    console.log(produto, "Produto");
-
     this.produtoService.cadastrar(produto);
   }
 

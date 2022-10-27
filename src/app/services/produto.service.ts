@@ -9,15 +9,19 @@ export class ProdutoService {
 
   constructor() { }
 
-
-  cadastrar(produto: ProdutoModel): void {
-    let produtos = this.listaProdutos();
-    produto.id = uuid.v4();
-    produtos.push(produto);
-    localStorage['produtos'] = JSON.stringify(produtos);
+  listaProdutos(): ProdutoModel[] {
+    return JSON.parse(localStorage.getItem('produtos')!) as ProdutoModel[] ?? [];
   }
 
-  atualizar(produto: ProdutoModel): void {
+  cadastrar(produto: ProdutoModel): void {
+    let produtos:ProdutoModel[] = this.listaProdutos();
+    produto.id = uuid.v4();
+    produtos.push(produto);
+    console.log(produtos);
+    localStorage.setItem('produtos', JSON.stringify(produtos));
+  }
+
+  editar(produto: ProdutoModel): void {
     let produtos = this.listaProdutos();
 
     for(let i = 0; i < produtos.length; i++) {
@@ -27,10 +31,22 @@ export class ProdutoService {
     }
 
     produtos.push(produto);
-    localStorage['produtos'] = JSON.stringify(produtos);
+    localStorage.setItem('produtos', JSON.stringify(produtos));
   }
 
-  listaProdutos(): ProdutoModel[] {
-    return JSON.parse(localStorage['produtos']) ?? [];
+  excluir(id:string): void{
+    let produtos:ProdutoModel[] = this.listaProdutos();
+
+    let novosProdutos:ProdutoModel[] = [];
+    for(let i = 0; i < produtos.length; i++){
+      if(produtos[i].id !== id) {
+        novosProdutos.push(produtos[i]);
+      }
+    }
+
+    produtos = novosProdutos;
+
+    localStorage.setItem('produtos', JSON.stringify(produtos));
   }
+
 }
